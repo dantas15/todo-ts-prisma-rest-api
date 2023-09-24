@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build: . # This uses the Dockerfile in the current directory to build the image for the app service.
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/home/node/app
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: prisma_dev_db
+volumes:
+  postgres_data:
+    driver: local
