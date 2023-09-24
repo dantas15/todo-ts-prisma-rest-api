@@ -5,9 +5,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
-    "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "start": "node ./dist/server.js"
+    "build": "tsc",
+    "start": "node ./dist/server.js",
+    "prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
+    "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down",
+    "db:restart": "yarn db:down && yarn db:up"
   },
   "devDependencies": {
     "@types/node": "^20.6.4",
