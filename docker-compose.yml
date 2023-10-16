@@ -2,19 +2,36 @@ version: '3'
 
 services:
   app:
-    build: . # This uses the Dockerfile in the current directory to build the image for the app service.
+    container_name: backend
+    image: node:lts-slim
     ports:
-      - '3000:3000'
+      - 3000:3000
     volumes:
-      - ./:/home/node/app
+      - .:/home/back-end
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgresql:5432/prisma_dev_db
+    command: ['npm', 'run', 'dev']
+    working_dir: /home/back-end
+    networks:
+      - database
 
   db:
+    container_name: postgresql
     image: postgres:16
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: prisma_dev_db
+    ports:
+      - 5432:5432
+    networks:
+      - database
+
 volumes:
   postgres_data:
     driver: local
+
+networks:
+  database:
+    driver: bridge
