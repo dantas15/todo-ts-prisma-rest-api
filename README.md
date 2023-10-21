@@ -1,4 +1,10 @@
-# rest-express-prisma-boilerplate
+**Table of contents**
+
+- [Environment variables](#environment-variables)
+- [How to run](#how-to-run)
+  - [Docker for development](#docker-for-development)
+  - [Dependencies](#dependencies)
+  - [Migrations](#migrations)
 
 This is a boilerplate for back end development using the following technologies:
 
@@ -15,6 +21,14 @@ This is a boilerplate for back end development using the following technologies:
 
 ```shell
 npm run <SCRIPT_NAME>
+```
+
+## Environment variables
+
+If you just want to run the development sever, just copy and paste the values from `.env.example` to a new `.env` file
+
+```shell
+cp .env.example .env
 ```
 
 ## How to run
