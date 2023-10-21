@@ -1,12 +1,19 @@
-import * as http from 'http';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import router from './controllers';
 
-const PORT = 3000;
+const app = express();
+app.disable('x-powered-by');
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello, World!\n');
-});
+const port = process.env.NODE_ENV ? 5000 : 3001;
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+
+app.use(router);
+
+app.listen(port, () => {
+  console.log(`Servidor rodando no link http://localhost:${port}`);
 });
