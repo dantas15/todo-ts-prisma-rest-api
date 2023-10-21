@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     container_name: backend
-    image: node:lts-slim
+    image: node:18-slim
     ports:
       - 3000:3000
     volumes:
