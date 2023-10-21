@@ -7,35 +7,64 @@ This is a boilerplate for back end development using the following technologies:
 - PrismaORM
 - ESLint + Prettier for code Linting
 - Docker for the development environment with
-  - Node.js v20
+
+  - Node.js v18 (current LTS version)
   - PostgreSQL
+
+- I'm using yarn, but you can use any other package manager, for example npm:
+
+```shell
+npm run <SCRIPT_NAME>
+```
 
 ## How to run
 
-### With Docker
+### Docker for development
 
-- Build containers
+- If you have Node.js installed, just run
 
-```bash
+```shell
+yarn dc:dev
+```
+
+Otherwise, just run the following commands:
+
+- First of all, you need to build containers
+
+```shell
 docker compose build
 ```
 
 - Start containers in detached mode
 
-```bash
+```shell
 docker compose up -d
 ```
 
 - Enter the node container
 
-```bash
+```shell
 docker compose exec app bash
 ```
 
-### Deps
+### Dependencies
 
 - Install dependencies
 
-```bash
+```shell
 yarn
+```
+
+### Migrations
+
+- Run migrations
+
+```shell
+yarn migrate:run
+```
+
+- If you made changes to `prisma/schema.prisma`, don't forget to create a [migration](https://cloud.google.com/architecture/database-migration-concepts-principles-part-1):
+
+```shell
+yarn migrate:dev
 ```
