@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { TaskController } from './TaskController';
+import { TaskController } from '@/controllers/TaskController';
 
 const router = Router();
 
 router.use('/tasks', TaskController);
 
-export default router;
+export { router };
