@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ToDo {
+model Task {
   id          Int          @id @default(autoincrement())
   title       String
   description String?
@@ -23,6 +23,6 @@ model Attachment {
   id     Int    @id @default(autoincrement())
   name   String
   url    String
-  todoId Int
-  todo   ToDo   @relation(fields: [todoId], references: [id])
+  taskId Int
+  task   Task   @relation(fields: [taskId], references: [id])
 }
