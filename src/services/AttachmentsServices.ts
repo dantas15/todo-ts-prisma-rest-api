@@ -1,27 +1,27 @@
 import { prisma } from '../database';
 
-export const AddAttachmentToTodo = async (
-  todoId: number,
+export const AddAttachmentToTask = async (
+  taskId: number,
   attachmentName: string,
   attachmentUrl: string
 ) => {
-  const todo = await prisma.toDo.findUnique({
+  const task = await prisma.task.findUnique({
     where: {
-      id: todoId
+      id: taskId
     }
   });
 
-  if (!todo) {
-    throw new Error(`Todo with id ${todoId} not found`);
+  if (!task) {
+    throw new Error(`Task with id ${taskId} not found`);
   }
 
   const attachment = await prisma.attachment.create({
     data: {
       name: attachmentName,
       url: attachmentUrl,
-      todo: {
+      task: {
         connect: {
-          id: todoId
+          id: taskId
         }
       }
     }
@@ -30,13 +30,13 @@ export const AddAttachmentToTodo = async (
   return attachment;
 };
 
-export const RemoveAttachmentFromTodo = async (attachmentId: number) => {
+export const RemoveAttachmentFromTask = async (attachmentId: number) => {
   const attachment = await prisma.attachment.findUnique({
     where: {
       id: attachmentId
     },
     include: {
-      todo: true
+      task: true
     }
   });
 
@@ -50,5 +50,5 @@ export const RemoveAttachmentFromTodo = async (attachmentId: number) => {
     }
   });
 
-  return attachment.todo;
+  return attachment.task;
 };
