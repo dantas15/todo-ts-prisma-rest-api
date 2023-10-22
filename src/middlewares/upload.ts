@@ -7,12 +7,12 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
-  }
+  },
 });
 
 // Initialize Multer middleware
 const upload = multer({
-  storage: storage
+  storage: storage,
 });
 
 export default upload;

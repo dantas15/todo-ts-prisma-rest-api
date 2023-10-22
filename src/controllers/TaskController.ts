@@ -4,12 +4,12 @@ import {
   DeleteTask,
   EditTask,
   GetTasks,
-  ToggleDoneState
+  ToggleDoneState,
 } from '../services/TaskServices';
 import { Router } from 'express';
 import {
   AddAttachmentToTask,
-  RemoveAttachmentFromTask
+  RemoveAttachmentFromTask,
 } from '../services/AttachmentsServices';
 
 const routes = Router();

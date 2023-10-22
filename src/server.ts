@@ -17,5 +17,5 @@ app.use(cors());
 app.use(router);
 
 app.listen(port, () => {
-  console.log(`Servidor rodando no link http://localhost:${port}`);
+  console.log(`Running on http://localhost:${port} 🚀`);
 });

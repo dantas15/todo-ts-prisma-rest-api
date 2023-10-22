@@ -20,13 +20,13 @@ export const ToggleDoneState = async (id: number) => {
   if (task.done) {
     return await prisma.task.update({
       where: { id },
-      data: { done: false }
+      data: { done: false },
     });
   }
 
   return await prisma.task.update({
     where: { id },
-    data: { done: true }
+    data: { done: true },
   });
 };
 

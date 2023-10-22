@@ -7,8 +7,8 @@ export const AddAttachmentToTask = async (
 ) => {
   const task = await prisma.task.findUnique({
     where: {
-      id: taskId
-    }
+      id: taskId,
+    },
   });
 
   if (!task) {
@@ -21,10 +21,10 @@ export const AddAttachmentToTask = async (
       url: attachmentUrl,
       task: {
         connect: {
-          id: taskId
-        }
-      }
-    }
+          id: taskId,
+        },
+      },
+    },
   });
 
   return attachment;
@@ -33,11 +33,11 @@ export const AddAttachmentToTask = async (
 export const RemoveAttachmentFromTask = async (attachmentId: number) => {
   const attachment = await prisma.attachment.findUnique({
     where: {
-      id: attachmentId
+      id: attachmentId,
     },
     include: {
-      task: true
-    }
+      task: true,
+    },
   });
 
   if (!attachment) {
@@ -46,8 +46,8 @@ export const RemoveAttachmentFromTask = async (attachmentId: number) => {
 
   await prisma.attachment.delete({
     where: {
-      id: attachmentId
-    }
+      id: attachmentId,
+    },
   });
 
   return attachment.task;
