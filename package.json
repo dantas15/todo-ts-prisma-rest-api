@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "typecheck": "tsc --noEmit",
-    "migrate:run": "prisma migrate generate",
+    "migrate:run": "prisma migrate",
     "migrate:dev": "prisma migrate dev",
     "migrate:reset": "prisma migrate reset",
     "build": "tsc",
