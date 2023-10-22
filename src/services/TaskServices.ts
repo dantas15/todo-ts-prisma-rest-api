@@ -1,4 +1,4 @@
-import { prisma } from '../database';
+import { prisma } from '@/database';
 
 export const CreateTask = async (task: ICreateTask) => {
   return await prisma.task.create({ data: task });

@@ -1,4 +1,4 @@
-import { prisma } from '../database';
+import { prisma } from '@/database';
 
 export const AddAttachmentToTask = async (
   taskId: number,

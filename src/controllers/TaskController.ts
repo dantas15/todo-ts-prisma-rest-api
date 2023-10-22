@@ -1,16 +1,16 @@
-import upload from '../middlewares/upload';
+import upload from '@/middlewares/upload';
 import {
   CreateTask,
   DeleteTask,
   EditTask,
   GetTasks,
   ToggleDoneState,
-} from '../services/TaskServices';
+} from '@/services/TaskServices';
 import { Router } from 'express';
 import {
   AddAttachmentToTask,
   RemoveAttachmentFromTask,
-} from '../services/AttachmentsServices';
+} from '@/services/AttachmentsServices';
 
 const routes = Router();
 
