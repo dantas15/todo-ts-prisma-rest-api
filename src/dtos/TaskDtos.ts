@@ -1,8 +1,8 @@
-type ICreateTodo = {
+type ICreateTask = {
   id: number;
   title: string;
   description: string;
   dueDate?: Date;
 };
 
-type IEditTodo = Partial<ICreateTodo>;
+type IEditTask = Partial<ICreateTask>;

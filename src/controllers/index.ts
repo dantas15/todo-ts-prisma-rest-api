@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import ToDos from './ToDos';
+import { TaskController } from './TaskController';
 
 const router = Router();
 
-router.use('/todos', ToDos);
+router.use('/tasks', TaskController);
 
 export default router;

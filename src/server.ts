@@ -6,7 +6,9 @@ import router from './controllers';
 const app = express();
 app.disable('x-powered-by');
 
-const port = process.env.NODE_ENV ? 5000 : 3001;
+// Use the port in process.env.PORT if available
+// otherwise use 3000
+const port = process.env.PORT ?? 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
