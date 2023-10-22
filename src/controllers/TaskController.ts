@@ -11,6 +11,8 @@ import {
   AddAttachmentToTask,
   RemoveAttachmentFromTask,
 } from '@/services/AttachmentsServices';
+import { taskSchema } from '@/models/Task';
+import { AppError } from '@/errors/AppError';
 
 const routes = Router();
 
@@ -23,15 +25,15 @@ routes.post('/', async (req, res) => {
 });
 
 routes.patch('/done/:id', async (req, res) => {
-  res.send(await ToggleDoneState(Number(req.params.id)));
+  res.send(await ToggleDoneState(req.params.id));
 });
 
 routes.put('/:id', async (req, res) => {
-  res.send(await EditTask(Number(req.params.id), req.body));
+  res.send(await EditTask(req.params.id, req.body));
 });
 
 routes.delete('/:id', async (req, res) => {
-  res.send(await DeleteTask(Number(req.params.id)));
+  res.send(await DeleteTask(req.params.id));
 });
 
 routes.post(
@@ -40,7 +42,7 @@ routes.post(
   async (req, res) => {
     res.send(
       await AddAttachmentToTask(
-        Number(req.params.taskId),
+        req.params.taskId,
         req.body.name,
         req.file?.path as string
       )
@@ -50,7 +52,7 @@ routes.post(
 
 routes.delete('/attachment/:attachmentId', async (req, res) => {
   try {
-    res.send(await RemoveAttachmentFromTask(Number(req.params.attachmentId)));
+    res.send(await RemoveAttachmentFromTask(req.params.attachmentId));
   } catch (err) {
     res.status(404).send({ message: err.message });
   }

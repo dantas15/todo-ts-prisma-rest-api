@@ -1,7 +1,7 @@
 import { prisma } from '@/database';
 
 export const AddAttachmentToTask = async (
-  taskId: number,
+  taskId: string,
   attachmentName: string,
   attachmentUrl: string
 ) => {
@@ -30,7 +30,7 @@ export const AddAttachmentToTask = async (
   return attachment;
 };
 
-export const RemoveAttachmentFromTask = async (attachmentId: number) => {
+export const RemoveAttachmentFromTask = async (attachmentId: string) => {
   const attachment = await prisma.attachment.findUnique({
     where: {
       id: attachmentId,

@@ -1,14 +1,16 @@
 import { z } from 'zod';
 
+const idSchema = z.string().uuid();
+
 const taskSchema = z.object({
-  id: z.number(),
+  id: idSchema.optional(),
   title: z.string(),
   description: z.string(),
   dueDate: z.date().optional(),
 });
 
-type ICreateTask = z.infer<typeof taskSchema>;
+type Task = z.infer<typeof taskSchema>;
 
-type IEditTask = Partial<ICreateTask>;
+type EditTask = Omit<Task, 'id'>;
 
-export { taskSchema, ICreateTask, IEditTask };
+export { idSchema, taskSchema, Task as ICreateTask, EditTask as IEditTask };
