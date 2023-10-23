@@ -21,7 +21,15 @@ routes.get('/', async (req, res) => {
 });
 
 routes.post('/', async (req, res) => {
-  res.send(await CreateTask(req.body));
+  const body = req.body;
+
+  const validatedBody = taskSchema.safeParse(body);
+
+  if (!validatedBody.success) {
+    throw new AppError(validatedBody.error);
+  }
+
+  res.send(await CreateTask(validatedBody.data));
 });
 
 routes.patch('/done/:id', async (req, res) => {
@@ -50,12 +58,12 @@ routes.post(
   }
 );
 
-routes.delete('/attachment/:attachmentId', async (req, res) => {
-  try {
-    res.send(await RemoveAttachmentFromTask(req.params.attachmentId));
-  } catch (err) {
-    res.status(404).send({ message: err.message });
-  }
-});
+// routes.delete('/attachment/:attachmentId', async (req, res) => {
+//   try {
+//     res.send(await RemoveAttachmentFromTask(req.params.attachmentId));
+//   } catch (err) {
+//     res.status(404).send({ message: err.message });
+//   }
+// });
 
 export { routes as TaskController };
