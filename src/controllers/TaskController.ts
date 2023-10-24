@@ -4,6 +4,7 @@ import {
   DeleteTask,
   EditTask,
   GetTasks,
+  GetUserTasks,
   ToggleDoneState,
 } from '@/services/TaskServices';
 import { Router } from 'express';
@@ -13,11 +14,18 @@ import {
 } from '@/services/AttachmentsServices';
 import { taskSchema } from '@/models/Task';
 import { AppError } from '@/errors/AppError';
+import IsAuthenticated from '@/middlewares/IsAuthenticated';
+import IsAdmin from '@/middlewares/IsAdmin';
 
 const routes = Router();
+routes.use(IsAuthenticated);
 
 routes.get('/', async (req, res) => {
   res.send(await GetTasks());
+});
+
+routes.get('/user/:userId', async (req, res) => {
+  res.send(await GetUserTasks(req.params.userId));
 });
 
 routes.post('/', async (req, res) => {

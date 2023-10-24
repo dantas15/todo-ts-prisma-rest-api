@@ -15,6 +15,13 @@ export const GetTasks = async () => {
   return await prisma.task.findMany({ include: { attachments: true } });
 };
 
+export const GetUserTasks = async (userId: string) => {
+  return await prisma.task.findMany({
+    where: { userId },
+    include: { attachments: true },
+  });
+};
+
 export const ToggleDoneState = async (id: string) => {
   const task = await prisma.task.findUnique({ where: { id } });
 

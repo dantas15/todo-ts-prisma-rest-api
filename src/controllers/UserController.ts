@@ -5,9 +5,10 @@ import {
   GetUser,
   DeleteUser,
   LoginUser,
+  ForgotPassword,
 } from '@/services/UserService';
 import { Router } from 'express';
-import { userSchema } from '@/models/User';
+import { userSchema, loginSchema } from '@/models/User';
 import { AppError } from '@/errors/AppError';
 import { sign } from 'jsonwebtoken';
 
@@ -33,12 +34,18 @@ routes.post('/', async (req, res) => {
   res.send(await CreateUser(validatedBody.data));
 });
 
+routes.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  res.send(await ForgotPassword(email));
+});
+
 routes.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = loginSchema.parse(req.body);
 
   const user = await LoginUser(email, password);
 
-  const token = sign({ id: user.id }, 'secret', {
+  const token = sign({ id: user.id, isAdmin: user.isAdmin }, 'secret', {
     expiresIn: '1d',
   });
 

@@ -7,6 +7,7 @@ const taskSchema = z.object({
   title: z.string(),
   description: z.string(),
   dueDate: z.date().optional(),
+  userId: idSchema,
 });
 
 type Task = z.infer<typeof taskSchema>;
