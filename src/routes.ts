@@ -1,10 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { TaskController } from '@/controllers/TaskController';
+import { UserController } from './controllers/UserController';
 import { AppError } from '@/errors/AppError';
 
 const router = Router();
 
 router.use('/tasks', TaskController);
+router.use('/users', UserController);
 
 // using express-async-errors to intercept errors
 router.use(
