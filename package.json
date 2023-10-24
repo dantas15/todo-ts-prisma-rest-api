@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only src/server.ts",
     "typecheck": "tsc --noEmit",
     "migrate:run": "prisma migrate",
     "migrate:dev": "prisma migrate dev",
