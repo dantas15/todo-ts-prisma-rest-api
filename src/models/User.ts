@@ -14,12 +14,13 @@ type User = z.infer<typeof userSchema>;
 
 type EditUser = Omit<User, 'id'>;
 
-type LoginUser = Pick<User, 'email' | 'password'>;
+export { idSchema, userSchema, User as ICreateUser, EditUser as IEditUser };
 
-export {
-  idSchema,
-  userSchema,
-  User as ICreateUser,
-  EditUser as IEditUser,
-  LoginUser as ILoginUser,
-};
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+type Login = z.infer<typeof loginSchema>;
+
+export { loginSchema, Login };
