@@ -6,11 +6,16 @@ import {
   DeleteUser,
   LoginUser,
   ForgotPassword,
+  ResetPassword,
 } from '@/services/UserService';
 import { Router } from 'express';
-import { userSchema, loginSchema } from '@/models/User';
+import {
+  userSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  loginSchema,
+} from '@/models/User';
 import { AppError } from '@/errors/AppError';
-import { sign } from 'jsonwebtoken';
 
 const routes = Router();
 
@@ -37,22 +42,48 @@ routes.post('/', async (req, res) => {
 routes.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
 
+  const validatedBody = forgotPasswordSchema.safeParse(req.body);
+
+  if (!validatedBody.success) {
+    throw new AppError(validatedBody.error);
+  }
+
   res.send(await ForgotPassword(email));
 });
 
+routes.post('/reset-password', async (req, res) => {
+  const { email, password, token } = req.body;
+
+  const validatedBody = resetPasswordSchema.safeParse(req.body);
+
+  if (!validatedBody.success) {
+    throw new AppError(validatedBody.error);
+  }
+
+  res.send(await ResetPassword(email, password, token));
+});
+
 routes.post('/login', async (req, res) => {
-  const { email, password } = loginSchema.parse(req.body);
+  const user = req.body;
 
-  const user = await LoginUser(email, password);
+  const validatedBody = loginSchema.safeParse(user);
 
-  const token = sign({ id: user.id, isAdmin: user.isAdmin }, 'secret', {
-    expiresIn: '1d',
-  });
+  if (!validatedBody.success) {
+    throw new AppError(validatedBody.error);
+  }
 
-  res.send({ user, token });
+  res.send(await LoginUser(user));
 });
 
 routes.put('/:id', async (req, res) => {
+  const body = req.body;
+
+  const validatedBody = userSchema.safeParse(body);
+
+  if (!validatedBody.success) {
+    throw new AppError(validatedBody.error);
+  }
+
   res.send(await EditUser(req.params.id, req.body));
 });
 

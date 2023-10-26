@@ -14,13 +14,30 @@ type User = z.infer<typeof userSchema>;
 
 type EditUser = Omit<User, 'id'>;
 
-export { idSchema, userSchema, User as ICreateUser, EditUser as IEditUser };
+type LoginUser = Omit<User, 'id' | 'name' | 'isAdmin'>;
+
+const forgotPasswordSchema = z.object({
+  email: z.string().email(),
+});
 
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
 
-type Login = z.infer<typeof loginSchema>;
+const resetPasswordSchema = z.object({
+  email: z.string().email(),
+  token: z.string(),
+  password: z.string().min(8),
+});
 
-export { loginSchema, Login };
+export {
+  idSchema,
+  userSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  loginSchema,
+  User as ICreateUser,
+  EditUser as IEditUser,
+  LoginUser as ILoginUser,
+};
