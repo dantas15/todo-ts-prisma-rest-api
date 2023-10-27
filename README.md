@@ -25,7 +25,8 @@ npm run <SCRIPT_NAME>
 
 ## Environment variables
 
-If you just want to run the development sever, just copy and paste the values from `.env.example` to a new `.env` file
+- If you just want to run the development sever inside `docker compose`, the file `docker-compose.yml` already contains the development environment variables in the file the container.
+- Otherwise, if you want to run the development server locally, just copy the `.env.example`:
 
 ```shell
 cp .env.example .env
