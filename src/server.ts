@@ -20,3 +20,5 @@ app.use(router);
 app.listen(port, () => {
   console.log(`Running on http://localhost:${port} 🚀`);
 });
+
+export { app };
