@@ -36,7 +36,9 @@ routes.post('/', async (req, res) => {
     throw new AppError(validatedBody.error);
   }
 
-  res.send(await CreateUser(validatedBody.data));
+  const createdUser = await CreateUser(validatedBody.data);
+
+  return res.status(201).send(createdUser);
 });
 
 routes.post('/forgot-password', async (req, res) => {
